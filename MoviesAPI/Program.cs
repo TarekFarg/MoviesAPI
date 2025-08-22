@@ -16,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IGenreServes,GenreServes>();
+builder.Services.AddTransient<IMovieServes,MovieServes>();
 
 var app = builder.Build();
 
