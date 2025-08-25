@@ -29,25 +29,17 @@ namespace MoviesAPI.Controllers
             return Ok(movies);
         }
 
-        // get Movie by Id 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetMovieById(int id)
-        {
-            var movie = await _movieServes.GetById(id);
-
-            if (movie == null)
-                return NotFound($"This Movie id={id} not found!");
-
-            return Ok(movie);
-        }
-
-        // get Movies by genreId 
-        //[HttpGet("{genreid}")]
-        //public async Task<IActionResult> GetMovieByGenreId(int genreId)
-        //{
-        //    var movies = await _movieServes.GetByGenreId(genreId);
-        //    return Ok(movies);
-        //}
+         // get Movies by genreId 
+         [HttpGet("{id}")]
+         public async Task<IActionResult> GetMovieByGenreId(int id)
+         {
+             if (!await _GenreServes.IsExist(id))
+                 return NotFound($"This Genre id={id} Not found!");
+        
+             var movies = await _movieServes.GetByGenreId(id);
+        
+             return Ok(movies);
+         }
 
         // create Movie 
         [HttpPost]
